@@ -17,7 +17,7 @@ public class CarProxy {
     @Autowired
     private CustomProperties props;
 
-    public Iterable<Car> getCar() {
+    public Iterable<Car> getCars() {
         String baseApiUrl = props.getApiUrl();
         String getCarsUrl = baseApiUrl + "/cars";
 
@@ -33,18 +33,64 @@ public class CarProxy {
         return response.getBody();
     }
 
-    public Car createCar(Car car){
+    public Car getCar(long id) {
         String baseApiUrl = props.getApiUrl();
-        String createCarUrl = baseApiUrl + "/cars";
+        String getEmployeeUrl = baseApiUrl + "/car/" + id;
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Car> response = restTemplate.exchange(
+                getEmployeeUrl,
+                HttpMethod.GET,
+                null,
+                Car.class
+        );
+
+        log.debug("Get Employee call " + response.getStatusCode().toString());
+
+        return response.getBody();
+    }
+
+
+    public Car saveCar(Car car){
+        String baseApiUrl = props.getApiUrl();
+        String saveCarUrl = baseApiUrl + "/cars";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<Car> request = new HttpEntity<Car>(car);
+        ResponseEntity<Car> response = restTemplate.exchange(
+                saveCarUrl,
+                HttpMethod.POST,
+                request,
+                Car.class);
+        log.debug("Save Car call " + response.getStatusCode().toString());
+        return response.getBody();
+
+    }
+
+    public Car updateCar(Car car) {
+        String baseApiUrl = props.getApiUrl();
+        String createCarUrl = baseApiUrl + "/cars/"+car.getId();
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Car> request = new HttpEntity<Car>(car);
         ResponseEntity<Car> response = restTemplate.exchange(
                 createCarUrl,
-                HttpMethod.POST,
+                HttpMethod.PUT,
                 request,
                 Car.class);
-        log.debug("Create Car call " + response.getStatusCode().toString());
+        log.debug("Update Car call " + response.getStatusCode().toString());
         return response.getBody();
+
+    }
+
+    public void deleteCar(long id) {
+        String baseApiUrl = props.getApiUrl();
+        String deleteCarUrl = baseApiUrl + "/car/"+id;
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Void> response = restTemplate.exchange(
+                deleteCarUrl,
+                HttpMethod.DELETE,
+                null,
+                Void.class);
+        log.debug("Delete Car call " + response.getStatusCode().toString());
 
     }
 
