@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 public class CarService {
     @Autowired
     private CarProxy carProxy;
-    Car getCar(final long id){
+    public Car getCar(final long id){
         return carProxy.getCar(id);
     }
-    Iterable<Car> getCars(){
+    public Iterable<Car> getCars(){
         return carProxy.getCars();
     }
 
-    void deleteCar(final long id){
+    public void deleteCar(final long id){
       carProxy.deleteCar(id);
     }
 
