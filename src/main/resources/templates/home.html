@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +7,23 @@
 <body>
 <h1> Hello World</h1>
 <h2>First page with Spring</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${cars.empty}">
+        <td colspan="3">No cars in bdd</td>
+    </tr>
+    <tr th:each="car: ${cars}">
+        <td><span th:text="${car.makeName}"> Make </span></td>
+        <td><span th:text="${car.modelName}"> Model </span></td>
+        <td> <a th:href="@{/deleteCar/{id}(id=${car.id})}">Delete Car</a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
