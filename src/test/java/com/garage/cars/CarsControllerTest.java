@@ -15,8 +15,12 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CarsControllerTest {
-    @Autowired
+
     private MockMvc mockMvc;
+
+    public CarsControllerTest(MockMvc mockMvc) {
+        this.mockMvc = mockMvc;
+    }
 
     @Test
     public void testGetCars() throws Exception{

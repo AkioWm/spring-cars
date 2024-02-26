@@ -14,8 +14,11 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 @Component
 public class CarProxy {
-    @Autowired
     private CustomProperties props;
+
+    public CarProxy(CustomProperties props) {
+        this.props = props;
+    }
 
     public Iterable<Car> getCars() {
         String baseApiUrl = props.getApiUrl();

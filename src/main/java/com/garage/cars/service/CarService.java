@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 @Data
 public class CarService {
-    @Autowired
+
     private CarProxy carProxy;
+    public CarService(CarProxy carProxy) {
+        this.carProxy = carProxy;
+    }
+
     public Car getCar(final long id){
         return carProxy.getCar(id);
     }

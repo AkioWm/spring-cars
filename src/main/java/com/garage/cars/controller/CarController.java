@@ -10,14 +10,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CarController {
-    @Autowired
     private CarService carService;
+
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
+
     @GetMapping("/")
     String home(Model model){
         Iterable<Car> carList = carService.getCars();
         model.addAttribute("cars",carList);
         model.addAttribute("car",new Car());
-
         return "home";
     }
     @GetMapping("/deleteCar/{id}")
