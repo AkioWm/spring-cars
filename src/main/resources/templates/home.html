@@ -29,8 +29,8 @@
 </table>
 
 <form method="post" th:action="@{/saveCar}" th:object="${car}">
-    <input type="text" th:field="*{modelName}">
     <input type="text" th:field="*{makeName}">
+    <input type="text" th:field="*{modelName}">
     <input type="text" th:field="*{horsePower}">
     <input type="text" th:field="*{retailPrice}">
     <button type="submit" c>create car</button>

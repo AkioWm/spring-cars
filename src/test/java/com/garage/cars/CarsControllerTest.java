@@ -29,7 +29,6 @@ public class CarsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
                 .andExpect(content().string(containsString("GTR")));
-
     }
 
 }

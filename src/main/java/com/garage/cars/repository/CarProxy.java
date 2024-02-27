@@ -56,7 +56,7 @@ public class CarProxy {
 
     public Car saveCar(Car car){
         String baseApiUrl = props.getApiUrl();
-        String saveCarUrl = baseApiUrl + "/cars";
+        String saveCarUrl = baseApiUrl + "/car";
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Car> request = new HttpEntity<Car>(car);
         ResponseEntity<Car> response = restTemplate.exchange(
